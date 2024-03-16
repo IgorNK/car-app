@@ -75,9 +75,8 @@ class MainScene {
                 this.wheelTransforms.push(transform);
             }
         }
-        console.log(this.wheelTransforms.length);
         this.scene.add(this.car.scene);
-        this.resetWheelPositions();
+        this.resetWheelPositions(this.wheelTransforms);
     }
 
     async loadWheels(path: string) {
@@ -89,27 +88,11 @@ class MainScene {
         this.wheels = new InstancedMesh(
             wheelGeo,
             wheelMat,
-            4
+            this.wheelTransforms.length
         );
-        // for (const transform of this.wheelTransforms) {
-        //     if (!wheelMesh) {
-        //         console.log('couldnt get wheel mesh');
-        //     }
-        //     if (wheelGeo) {
-        //         let inst = new InstancedMesh(
-        //             wheelGeo,
-        //             wheelMat,
-        //             1
-        //         );
-        //         inst.instanceMatrix.setUsage(DynamicDrawUsage);
-        //         this.wheels.push(inst);
-        //         this.scene.add(inst);
-        //         console.log('added instance');
-        //     } else {
-        //         console.log('couldnt find wheel');
-        //     }
-        // }
-        this.resetWheelPositions();
+        this.wheels.instanceMatrix.setUsage(DynamicDrawUsage);
+        this.scene.add(this.wheels);
+        this.resetWheelPositions(this.wheelTransforms);
     }
 
     private clearWheels() {
@@ -117,22 +100,16 @@ class MainScene {
         this.wheels = null;
     }
 
-    private resetWheelPositions() {
-        console.log('reset');
-        // for (let wheel of this.wheels) {
-        //     wheel.removeFromParent();
-        // }
-        for (let index = 0; index < this.wheelTransforms.length; index++) {
-            const transform: Matrix4 | undefined = this.wheelTransforms[index];
+    private resetWheelPositions(transforms: Array<Matrix4>) {
+        for (let index = 0; index < transforms.length; index++) {
+            const transform: Matrix4 | undefined = transforms[index];
             if (transform && this.wheels) {
-                // this.scene.add(this.wheels[index]);
                 this.wheels.setMatrixAt(index, transform);
-                this.wheels.instanceMatrix.needsUpdate = true;
-                console.log(transform);
+                // console.log(transform);
             }
         }
         if (this.wheels) {
-            this.scene.add(this.wheels);
+            this.wheels.instanceMatrix.needsUpdate = true;
         }
     }
 
