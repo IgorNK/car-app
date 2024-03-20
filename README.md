@@ -22,6 +22,8 @@ You can swap around the chassis, wheels and background hdri image with on-screen
 You can play around the deployed app at:
 
 [https://igornk.github.io/car-app/](https://igornk.github.io/car-app/)
+## Known bugs
+When you change the car chassis, wheels move to the (0, 0, 0) transform. Need to figure out how to properly update InstancedMesh transforms without re-instantiating them.
 ## Credits
 ### Car model #1:
 "Car Scene" by toivo (https://sketchfab.com/toivo) licensed under [CC-BY-4.0](http://creativecommons.org/licenses/by/4.0/)
