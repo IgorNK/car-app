@@ -3,6 +3,8 @@
 A simple project intended to familiarize myself with Three.js and Svelte frameworks.
 
 Models are using .gltf format and statically loaded.
+![image](https://github.com/IgorNK/car-app/assets/117646556/2883e25b-c700-493b-ab84-2cb007a6dbb9)
+
 
 ## Installation
 ```
